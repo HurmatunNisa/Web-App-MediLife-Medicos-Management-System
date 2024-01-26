@@ -1,0 +1,74 @@
+<div class="row col col-md-12">
+  <div class="col col-md-6 form-group">
+    <label class="font-weight-bold" for="username">Username:</label>
+    <input type="text" class="form-control" id="username" placeholder="Username" onblur="notNull(this.value, 'username_error');">
+    <code class="text-danger small font-weight-bold float-right" id="username_error" style="display: none;"></code>
+  </div>
+  <div class="col col-md-6 form-group">
+    <label class="font-weight-bold" for="password">Password:</label>
+    <input type="password" class="form-control" id="password" placeholder="Password" onblur="validatePasswordLength();">
+    <code class="text-danger small font-weight-bold float-right" id="password_error" style="display: none;"></code>
+  </div>
+</div>
+
+<div class="row col col-md-12">
+  <div class="col col-md-6 form-group">
+    <label class="font-weight-bold" for="confirm_password">Confirm Password:</label>
+    <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" onblur="checkPasswordMatch();">
+    <code class="text-danger small font-weight-bold float-right" id="password_match_error" style="display: none;"></code>
+  </div>
+  <div class="col col-md-6 form-group">
+    <label class="font-weight-bold" for="user_type">User Type:</label>
+    <select class="form-control" id="user_type">
+      <option value="admin">admin</option>
+      <option value="manager">manager</option>
+      <option value="salesperson">salesperson</option>
+    </select>
+  </div>
+</div>
+
+<div class="col col-md-6 form-group">
+  <label class="font-weight-bold" for="address">Address:</label>
+  <input type="text" class="form-control" id="address" placeholder="address" onblur="validateAddress(this.value, 'address_error');">
+  <code class="text-danger small font-weight-bold float-right" id="address_error" style="display: none;"></code>
+</div>
+
+<div class="row col col-md-12">
+  <div class="col col-md-12 form-group">
+    <label class="font-weight-bold" for="email">Email:</label>
+    <input type="email" class="form-control" id="email" placeholder="Email" onblur="validateEmail(this.value, 'email_error');">
+    <code class="text-danger small font-weight-bold float-right" id="email_error" style="display: none;"></code>
+  </div>
+</div>
+
+<div class="row col col-md-12">
+  <div class="col col-md-12 form-group">
+    <label class="font-weight-bold" for="contact_number">Contact Number:</label>
+    <input type="number" class="form-control" id="contact_number" placeholder="Contact Number" onblur="validateContactNumber(this.value, 'contact_error');">
+    <code class="text-danger small font-weight-bold float-right" id="contact_error" style="display: none;"></code>
+  </div>
+</div>
+
+  
+<hr>
+
+<div class="col col-md-12">
+  <hr class="col-md-12 float-left" style="padding: 0px; width: 95%; border-top: 2px solid  #02b6ff;">
+</div>
+
+<!-- new user button -->
+<div class="row col col-md-12">
+  &emsp;
+  <div class="form-group m-auto">
+    <button class="btn btn-primary form-control" onclick="addUser();">ADD</button>
+  </div>
+  <!--
+  &emsp;
+  <div class="form-group">
+    <button class="btn btn-success form-control">Save and Add Another</button>
+  </div>
+-->
+</div>
+<!-- customer details content end -->
+<!-- result message -->
+<div id="user_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;"></div>

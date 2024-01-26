@@ -1,0 +1,134 @@
+<head>
+  <script src="js/suggestions.js"></script>
+  <script src="js/validateForm.js"></script>
+  <script src="js/restrict.js"></script>
+</head>
+
+<div id="stock_form">
+  <div  class="row col col-md-12">
+    <div class="col col-md-8 form-group">
+      <label class="font-weight-bold" for="medicine_name">Medicine Name :</label>
+      <input style="width: 325px;" type="text" class="form-control" id="medicines_name" placeholder="Medicine Name" onkeyup="showSuggestions(this.value, 'medicine');">
+      <input type="text" class="form-control" id="medicines_id" disabled hidden>
+      <code class="text-danger small font-weight-bold float-right" id="medicines_name_error" style="display: none;"></code>
+      <div id="medicine_suggestions" class="list-group position-fixed" style="z-index: 1; width: 18.30%; overflow: auto; max-height: 200px;"></div>
+    </div>
+    <div class="col col-md-4 form-group">
+      <label class="font-weight-bold" for="exp_date">Expiry Date :</label>
+      <input type="date" class="form-control" id="exp_date" placeholder="Expiry Date" onblur="notNull(this.value, 'exp_error');">
+      <code class="text-danger small font-weight-bold float-right" id="exp_error" style="display: none;"></code>
+    </div>
+  </div>
+  
+
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="batch_id">BATCH ID :</label>
+      <input type="text" class="form-control" name="batch_id" id="batch_id" placeholder="Unique Batch Id" onblur="notNull(this.value, 'batch_error');">
+      <code class="text-danger small font-weight-bold float-right" id="batch_error" style="display: none;"></code>
+    </div>
+  </div>
+  <!-- help to trace production history of med.batch d is combo of product code production year
+  nd sequential no.help to respond customer queries.company assign one med produced in single
+  run a unique batch id. -->
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="suppliers_name">Supplier :</label>
+      <input id="suppliers_name" type="text" class="form-control" id="suppliers_name" placeholder="Supplier Name" name="suppliers_name" onkeyup="showSuggestions(this.value, 'supplier');">
+      <code class="text-danger small font-weight-bold float-right" id="supplier_name_error" style="display: none;"></code>
+      <div id="supplier_suggestions" class="list-group position-fixed" style="z-index: 1; width: 35.80%; overflow: auto; max-height: 200px;"></div>
+    </div>
+  </div>
+
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="quantity">QUANTITY :</label>
+      <input type="number" class="form-control" id="quantity" placeholder="QUANTITY" onblur="notNull(this.value, 'quantity_error');">
+      <code class="text-danger small font-weight-bold float-right" id="quantity_error" style="display: none;"></code>
+    </div>
+  </div>
+
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="mrp">MRP:</label>
+      <input type="number" class="form-control" id="mrp" placeholder="Enter Selling Price/Unit" onblur="notNull(this.value, 'mrp_error');">
+      <code class="text-danger small font-weight-bold float-right" id="mrp_error" style="display: none;"></code>
+    </div>
+  </div>
+
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="rate">Rate:</label>
+      <input type="number" class="form-control" id="rate" placeholder="Enter Cost Price/Unit" onblur="notNull(this.value, 'rate_error');">
+      <code class="text-danger small font-weight-bold float-right" id="rate_error" style="display: none;"></code>
+    </div>
+  </div>
+
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="min_stock">Min Stock Lvl:</label>
+      <input type="number" class="form-control" id="min_stock" placeholder="Min Stock Lvl:" onblur="notNull(this.value, 'min_stock_error');">
+      <code class="text-danger small font-weight-bold float-right" id="min_stock_error" style="display: none;"></code>
+    </div>
+  </div>
+
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="max_stock">Max Stock Lvl:</label>
+      <input type="number" class="form-control" id="max_stock" placeholder="Max Stock Lvl:" onblur="notNull(this.value, 'max_stock_error');">
+      <code class="text-danger small font-weight-bold float-right" id="max_stock_error" style="display: none;"></code>
+    </div>
+  </div>
+
+  <div class="row col col-md-12">
+    <div class="col col-md-12 form-group">
+      <label class="font-weight-bold" for="stock_in_date">Stock_In_Date :</label>
+      <input type="date" class="form-control" id="stock_in_date" placeholder="Stock_In_Date" onblur="notNull(this.value, 'date_error');" disabled>
+      <code class="text-danger small font-weight-bold float-right" id="date_error" style="display: none;"></code>
+    </div>
+  </div>
+  
+  
+  
+  <div class="row col col-md-12">
+    <div class="col col-md-5 font-weight-bold" style="color: green;cursor:pointer" onclick="document.getElementById('add_new_medicine_model').style.display = 'block';">
+      <i class="fa fa-plus"></i>Add New Product
+    </div>
+  </div>
+  <hr>
+  
+  <div class="col col-md-12">
+    <hr class="col-md-12 float-left" style="padding: 0px; width: 95%; border-top: 2px solid  #02b6ff;">
+  </div>
+  
+  <!-- new user button -->
+  <div class="row col col-md-12">
+    &emsp;
+    <div class="form-group m-auto">
+      <button class="btn btn-primary form-control" onclick="addStock();">ADD STOCK</button>
+    </div>
+    <!--
+    &emsp;
+    <div class="form-group">
+      <button class="btn btn-success form-control">Save and Add Another</button>
+    </div>
+  -->
+  </div>
+
+  <script>
+    // Get the current date and time
+    var currentDateTime = new Date();
+    
+    // Get the current date in yyyy-mm-dd format
+    var formattedDate = currentDateTime.toISOString().split('T')[0];
+    
+    // Get the current time in HH:mm format
+    var formattedTime = currentDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+    
+    // Set the value of the input fields
+    document.getElementById("stock_in_date").value = formattedDate;
+    // document.getElementById("sale_time").value = formattedTime;
+  </script>
+  <!-- customer details content end -->
+  <!-- result message -->
+  <div id="stock_acknowledgement" class="col-md-12 h5 text-success font-weight-bold text-center" style="font-family: sans-serif;"></div>
